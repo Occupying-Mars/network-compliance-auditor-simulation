@@ -1,0 +1,49 @@
+compliance_report:
+  devices:
+    Router1:
+      total_violations: 4
+      violations:
+      - description: 'FOUND: Telnet access should be disabled'
+        expected_config: SHOULD NOT BE PRESENT
+        found_config: transport input telnet ssh
+        rule: no_telnet_access
+        severity: HIGH
+      - description: 'MISSING: SSH access should be configured'
+        expected_config: transport input ssh
+        found_config: NOT FOUND
+        rule: ssh_access_configured
+        severity: MEDIUM
+      - description: 'MISSING: NTP server should be configured'
+        expected_config: ntp server
+        found_config: NOT FOUND
+        rule: ntp_configured
+        severity: MEDIUM
+      - description: 'MISSING: SNMP community should be configured'
+        expected_config: snmp-server community
+        found_config: NOT FOUND
+        rule: snmp_community_configured
+        severity: LOW
+    Switch1:
+      total_violations: 4
+      violations:
+      - description: 'MISSING: Logging should be configured'
+        expected_config: logging synchronous
+        found_config: NOT FOUND
+        rule: logging_configured
+        severity: MEDIUM
+      - description: 'MISSING: NTP server should be configured'
+        expected_config: ntp server
+        found_config: NOT FOUND
+        rule: ntp_configured
+        severity: MEDIUM
+      - description: 'MISSING: SNMP community should be configured'
+        expected_config: snmp-server community
+        found_config: NOT FOUND
+        rule: snmp_community_configured
+        severity: LOW
+      - description: 'MISSING: Access lists should be configured'
+        expected_config: access-list
+        found_config: NOT FOUND
+        rule: access_list_configured
+        severity: MEDIUM
+  timestamp: null

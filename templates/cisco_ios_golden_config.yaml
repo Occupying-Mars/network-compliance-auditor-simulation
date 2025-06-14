@@ -1,0 +1,107 @@
+---
+# Cisco IOS Golden Configuration Template
+# Defines the expected configuration standards for Cisco IOS devices
+
+golden_config:
+  name: "Cisco IOS Standard Configuration"
+  version: "1.0"
+  description: "Standard configuration template for Cisco IOS routers and switches"
+  
+  # Required global configurations
+  global_config:
+    - pattern: "service password-encryption"
+      description: "Enable password encryption"
+      required: true
+      severity: "HIGH"
+    
+    - pattern: "enable secret"
+      description: "Configure enable secret"
+      required: true
+      severity: "HIGH"
+    
+    - pattern: "no ip http server"
+      description: "Disable HTTP server"
+      required: true
+      severity: "HIGH"
+    
+    - pattern: "ip http secure-server"
+      description: "Enable HTTPS server only"
+      required: false
+      severity: "MEDIUM"
+    
+    - pattern: "ntp server"
+      description: "Configure NTP server"
+      required: true
+      severity: "MEDIUM"
+    
+    - pattern: "logging"
+      description: "Configure logging"
+      required: true
+      severity: "MEDIUM"
+    
+    - pattern: "snmp-server community"
+      description: "Configure SNMP community"
+      required: false
+      severity: "LOW"
+
+  # Interface configurations
+  interface_config:
+    - pattern: "duplex auto"
+      description: "Set interface duplex to auto"
+      required: true
+      severity: "LOW"
+    
+    - pattern: "speed auto"
+      description: "Set interface speed to auto"
+      required: true
+      severity: "LOW"
+
+  # Line configurations
+  line_config:
+    - pattern: "transport input ssh"
+      description: "Enable SSH access only"
+      required: true
+      severity: "HIGH"
+    
+    - pattern: "logging synchronous"
+      description: "Enable synchronous logging"
+      required: true
+      severity: "MEDIUM"
+    
+    - pattern: "exec-timeout"
+      description: "Configure session timeout"
+      required: true
+      severity: "MEDIUM"
+
+  # Security configurations
+  security_config:
+    - pattern: "access-list"
+      description: "Configure access control lists"
+      required: true
+      severity: "MEDIUM"
+    
+    - pattern: "username .* privilege 15"
+      description: "Configure privileged user accounts"
+      required: true
+      severity: "HIGH"
+
+  # Routing configurations (optional)
+  routing_config:
+    - pattern: "router ospf|router eigrp|router bgp"
+      description: "Configure routing protocol"
+      required: false
+      severity: "LOW"
+
+# Forbidden configurations (should not be present)
+forbidden_config:
+  - pattern: "transport input telnet"
+    description: "Telnet should be disabled"
+    severity: "HIGH"
+  
+  - pattern: "no service password-encryption"
+    description: "Password encryption should not be disabled"
+    severity: "HIGH"
+  
+  - pattern: "enable password"
+    description: "Plain text enable password should not be used"
+    severity: "HIGH" 
